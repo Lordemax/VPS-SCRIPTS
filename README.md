@@ -52,7 +52,7 @@ Tested on
 * Squid port 8080 (limit to IP VPS)
 * badvpn-udpgw port 7300
 
-### Fitur
+### Function
 * Webmin http(s)://[ip]:10000/
 * vnstat http://[ip]/vnstat/
 * MRTG http://[ip]/mrtg/
@@ -68,7 +68,7 @@ Tested on
 * mtr
 * nethogs  
 
-### What's script included
+### What's script installed
 * screenfetch
 * ps_mem.py (https://github.com/pixelb/ps_mem/)
 * speedtest-cli (https://github.com/sivel/speedtest-cli)
