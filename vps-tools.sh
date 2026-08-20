@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$(readlink -f -- "$0")")" && pwd)
+show_version() {
+  printf 'VPS-SCRIPTS version %s\n' "$(tr -d '[:space:]' <"$SCRIPT_DIR/VERSION")"
+}
+
+if [[ ${1:-} == version || ${1:-} == --version || ${1:-} == -V ]]; then
+  show_version
+  exit 0
+fi
+
 if [[ $EUID -ne 0 ]]; then
   echo "Run this command as root." >&2
   exit 1
@@ -15,6 +25,7 @@ Usage:
   vps-tools.sh ram
   vps-tools.sh bandwidth
   vps-tools.sh backup
+  vps-tools.sh version
 
 Commands are read-only except backup, which creates a local archive in
 /root/vps-backups.
@@ -219,6 +230,7 @@ VPS tools
 14) Enable IPv6
 15) Disable IPv6
 16) Advanced services
+17) Show version
 q) Quit
 EOF
     read -r -p 'Choose an option: ' choice
@@ -239,6 +251,7 @@ EOF
       14) set_ipv6 1 ;;
       15) set_ipv6 0 ;;
       16) exec "$(dirname -- "$(readlink -f -- "$0")")/advanced-services.sh" menu ;;
+      17) show_version ;;
       q|Q) return 0 ;;
       *) echo 'Invalid choice.' >&2 ;;
     esac
@@ -262,5 +275,6 @@ case "${1:-menu}" in
   backup-off) disable_backup_schedule ;;
   ipv6-on) set_ipv6 1 ;;
   ipv6-off) set_ipv6 0 ;;
+  version|--version|-V) show_version ;;
   *) usage; exit 1 ;;
 esac

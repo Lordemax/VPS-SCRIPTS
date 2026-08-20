@@ -61,6 +61,14 @@ sudo bash user-manager.sh delete USER
 The user manager only modifies regular users (UID 1000 or higher). Passwords
 are entered interactively and are never placed in command-line arguments.
 
+### Version
+```bash
+bash version.sh
+bash vps-tools.sh version
+```
+The current release is tracked in `VERSION` so all maintained tools report the
+same version.
+
 ### VPS tools
 ```bash
 sudo bash vps-tools.sh menu

@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$(readlink -f -- "$0")")" && pwd)
+
+if [[ ${1:-} == version || ${1:-} == --version || ${1:-} == -V ]]; then
+  printf 'VPS-SCRIPTS version %s\n' "$(tr -d '[:space:]' <"$SCRIPT_DIR/VERSION")"
+  exit 0
+fi
+
 if [[ $EUID -ne 0 ]]; then
   echo "Run this installer as root." >&2
   exit 1
 fi
 
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$(readlink -f -- "$0")")" && pwd)
 STATE_DIR=/etc/vps-scripts
 XRAY_CONFIG=/usr/local/etc/xray/config.json
 
