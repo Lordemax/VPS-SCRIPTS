@@ -1,0 +1,11 @@
+*.log
+*.tar
+*.tar.gz
+*.zip
+*.ovpn
+*.pem
+*.key
+client.tar
+pass.txt
+/root/
+backup/
